@@ -12,6 +12,8 @@ export function useFormState(
     onError?: (message: string) => void
     /** Callback when the form has a success. */
     onSuccess?: (message?: string) => Promise<void> | void
+    /** Optimistic function to use with the use form state. */
+    optimisticFn?: (formData: FormData) => void
     /** Initial data for the form. */
     initialData?: FormState
     /** This will reset the form state when the action is successful. */
@@ -33,6 +35,10 @@ export function useFormState(
     const data = new FormData(form)
 
     startTransition(async () => {
+      if (opts?.optimisticFn) {
+        opts.optimisticFn(data)
+      }
+
       const result = await action(data)
 
       if (result.success === false && opts?.onError) {
