@@ -11,6 +11,7 @@ type BookmarkAction =
 type BookmarkContextType = {
   bookmarks: Bookmark[]
   create: ({ title, bookmarkUrl }: { title: string; bookmarkUrl: string }) => void
+  remove: (id: string) => void
 }
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(undefined)
@@ -46,8 +47,12 @@ export function BookmarkProvider({
     setOptimisticBookmarks({ type: 'ADD', payload: { title, bookmarkUrl } })
   }
 
+  const remove = (id: string) => {
+    setOptimisticBookmarks({ type: 'REMOVE', payload: { id } })
+  }
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  const value = useMemo(() => ({ bookmarks: optimisticBookmarks, create }), [optimisticBookmarks])
+  const value = useMemo(() => ({ bookmarks: optimisticBookmarks, create, remove }), [optimisticBookmarks])
 
   return <BookmarkContext.Provider value={value}>{children}</BookmarkContext.Provider>
 }
