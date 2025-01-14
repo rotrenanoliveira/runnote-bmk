@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { cookies } from 'next/headers'
+import type { Metadata } from 'next'
+
+import { getUserBookmarks } from '@/server/data/get-bookmarks'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -11,11 +14,14 @@ export const metadata: Metadata = {
   description: 'A new way to manage bookmarks and saved links.',
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const userId = (await cookies()).get('runnote:userId')?.value
+  const bookmarks = getUserBookmarks(userId)
+
   return (
     <html lang="en" suppressHydrationWarning className="light">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>{children}</Providers>
+        <Providers bookmarksPromise={bookmarks}>{children}</Providers>
       </body>
     </html>
   )
