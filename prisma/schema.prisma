@@ -18,7 +18,7 @@ model Bookmark {
   createdAt   DateTime @default(now()) @map("created_at")
 
   folderId String?
-  folder   Folder? @relation(fields: [folderId], references: [folderId])
+  folder   Folder? @relation(fields: [folderId], references: [folderId], onDelete: Cascade)
 
   @@index([userId])
   @@map("bookmarks")
