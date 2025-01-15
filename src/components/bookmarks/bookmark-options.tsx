@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { BookmarkDeleteButton } from './bookmark-delete'
+import { BookmarkOptionSubMenu } from './bookmark-options-submenu'
 import type { Bookmark } from '@/utils/types'
 
 interface BookmarkOptionsProps {
@@ -54,6 +55,8 @@ export function BookmarkOptions({ bookmark }: BookmarkOptionsProps) {
             <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
             {/* <FolderDialog /> */}
           </DropdownMenuItem>
+          {/* move bookmark */}
+          <BookmarkOptionSubMenu userId={bookmark.userId} bookmarkId={bookmark.id} />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         {/* Remove Bookmark */}
