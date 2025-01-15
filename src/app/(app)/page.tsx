@@ -4,6 +4,7 @@ import { getUserId } from '@/server/data/get-user-id'
 import { BookmarkForm } from '@/components/bookmarks/bookmark-form'
 import { SyncDialog } from '@/components/sync/sync-dialog'
 import { UnfoldedBookmarks } from '@/components/bookmarks/unfolded-bookmarks'
+import { FolderDialog } from '@/components/folders/folder-dialog'
 
 export default async function HomePage() {
   const userId = await getUserId()
@@ -21,6 +22,7 @@ export default async function HomePage() {
           <BookmarkForm />
 
           <div className="space-x-2 self-end">
+            <FolderDialog />
             <SyncDialog userId={userId} appUrl={appUrl} />
           </div>
         </div>
