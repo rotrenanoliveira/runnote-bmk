@@ -2,9 +2,10 @@ import { redirect } from 'next/navigation'
 
 import { getUserId } from '@/server/data/get-user-id'
 import { BookmarkForm } from '@/components/bookmarks/bookmark-form'
-import { SyncDialog } from '@/components/sync/sync-dialog'
 import { UnfoldedBookmarks } from '@/components/bookmarks/unfolded-bookmarks'
+import { Folders } from '@/components/folders/folders'
 import { FolderDialog } from '@/components/folders/folder-dialog'
+import { SyncDialog } from '@/components/sync/sync-dialog'
 
 export default async function HomePage() {
   const userId = await getUserId()
@@ -29,6 +30,7 @@ export default async function HomePage() {
 
         <section className="w-full max-w-4xl grid grid-cols-1 gap-4">
           <UnfoldedBookmarks />
+          <Folders />
         </section>
       </main>
     </div>
