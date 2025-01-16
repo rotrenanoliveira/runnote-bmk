@@ -29,14 +29,14 @@ export function BookmarkForm() {
     const title = match ? match[1] : url
 
     create({ title, bookmarkUrl: url })
+
+    formRef.current?.reset()
   }
 
-  const [formState, handleSubmit, isPending] = useFormState(actionAddBookmark, {
+  const [formState, handleSubmit] = useFormState(actionAddBookmark, {
     onSuccess,
     onError,
     optimisticFn,
-    formRef,
-    reset: true,
   })
 
   function onError(message: string) {
@@ -53,7 +53,10 @@ export function BookmarkForm() {
         {formState.success === false && <p className="text-red-500">{formState.message}</p>}
         <div className="flex gap-2">
           <Input type="text" name="url" placeholder="Enter URL" />
-          <Button type="submit" disabled={isPending}>
+          {/* <Button type="submit" disabled={isPending}> */}
+          <Button type="submit">
+            {/* <Plus strokeWidth={1.25} className={cn('size-5', isPending && 'hidden')} />
+            {isPending && <Loader2Icon strokeWidth={1.25} className="size-5 animate-spin" />} */}
             <Plus strokeWidth={1.25} className="size-5" />
           </Button>
         </div>

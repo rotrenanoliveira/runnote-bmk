@@ -23,12 +23,18 @@ export const responseError = z.object({
   message: z.string(),
 })
 
-/** bookmark data fetched from the url */
-export const urlDataSchema = z.object({
-  title: z.string(),
+/** bookmark data fetcher */
+export const urlDataFetcherSchema = z.object({
+  title: z.string().nullish(),
   favicon: z.string().nullish(),
   ogImage: z.string().url().nullish(),
   description: z.string().nullish(),
+  bookmarkUrl: z.string().nullish(),
+})
+
+/** bookmark data fetched from the url */
+export const urlDataSchema = urlDataFetcherSchema.extend({
+  title: z.string(),
   bookmarkUrl: z.string(),
 })
 
@@ -76,5 +82,7 @@ export type FolderCreateInput = z.infer<typeof folderCreateInputSchema>
 export type Folder = z.infer<typeof folderSchema>
 /** standard response error */
 export type ResponseError = z.infer<typeof responseError>
+/** bookmark data fetcher */
+export type UrlDataFetcher = z.infer<typeof urlDataFetcherSchema>
 /** bookmark data fetched from the url */
 export type UrlData = z.infer<typeof urlDataSchema>
