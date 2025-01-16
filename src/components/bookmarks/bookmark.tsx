@@ -1,6 +1,6 @@
 'use client'
 
-import { Star } from 'lucide-react'
+import { GlobeIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -34,7 +34,7 @@ export function Bookmark({ bookmark }: BookmarkProps) {
               {bookmark.favicon ? (
                 <Image src={bookmark.favicon} alt={bookmark.title} width={24} height={24} />
               ) : (
-                <Star className="size-6 text-muted-foreground" />
+                <GlobeIcon strokeWidth={1.25} className="size-6 text-muted-foreground" />
               )}
               <p className="font-semibold truncate">{bookmarkTitle}</p>
               <span className="hidden md:inline font-light text-muted-foreground/75">{bookmarkUrl}</span>
