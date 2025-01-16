@@ -1,18 +1,11 @@
 import { Ellipsis } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { BookmarkCopy } from './bookmark-copy-url'
 import { BookmarkDeleteButton } from './bookmark-delete'
-import { BookmarkOptionSubMenu } from './bookmark-options-submenu'
+import { BookmarkMoveSubMenu } from './bookmark-move-submenu'
+import { BookmarkRename } from './bookmark-rename'
 import type { Bookmark } from '@/utils/types'
 
 interface BookmarkOptionsProps {
@@ -20,10 +13,6 @@ interface BookmarkOptionsProps {
 }
 
 export function BookmarkOptions({ bookmark }: BookmarkOptionsProps) {
-  function handleCopyBookmark() {
-    navigator.clipboard.writeText(bookmark.bookmarkUrl)
-  }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,33 +23,15 @@ export function BookmarkOptions({ bookmark }: BookmarkOptionsProps) {
           <Ellipsis className="size-5 text-foreground/50 group-hover:text-foreground/75" strokeWidth={1.25} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
-        <DropdownMenuLabel>Options</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          {/* Copy Bookmark */}
-          <DropdownMenuItem>
-            <Button
-              variant="ghost"
-              className="w-full h-fit m-0 p-0 justify-start border-none hover:bg-none font-medium"
-              onClick={handleCopyBookmark}
-            >
-              Copy URL
-              <DropdownMenuShortcut>⌘+⇧+C</DropdownMenuShortcut>
-            </Button>
-          </DropdownMenuItem>
-          {/* new folder */}
-          <DropdownMenuItem disabled>
-            New Folder
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-            {/* <FolderDialog /> */}
-          </DropdownMenuItem>
-          {/* move bookmark */}
-          <BookmarkOptionSubMenu userId={bookmark.userId} bookmarkId={bookmark.id} />
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        {/* Remove Bookmark */}
+      <DropdownMenuContent className="w-56 space-y-1" align="end">
+        {/* bookmark copy */}
+        <BookmarkCopy bookmarkUrl={bookmark.bookmarkUrl} />
+        {/* bookmark rename */}
+        <BookmarkRename bookmarkId={bookmark.id} />
+        {/* bookmark delete */}
         <BookmarkDeleteButton bookmarkId={bookmark.id} />
+        {/* bookmark move */}
+        <BookmarkMoveSubMenu userId={bookmark.userId} bookmarkId={bookmark.id} />
       </DropdownMenuContent>
     </DropdownMenu>
   )

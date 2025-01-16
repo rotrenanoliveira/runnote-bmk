@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { FastForwardIcon } from 'lucide-react'
 
 import {
   DropdownMenuItem,
@@ -10,12 +11,12 @@ import {
 import { getFolders } from '@/server/data/get-folders'
 import { BookmarkMove } from './bookmark-move'
 
-interface MoveBookmarkProps {
+interface BookmarkMoveSubMenuProps {
   userId: string
   bookmarkId: string
 }
 
-export function BookmarkOptionSubMenu({ userId, bookmarkId }: MoveBookmarkProps) {
+export function BookmarkMoveSubMenu({ userId, bookmarkId }: BookmarkMoveSubMenuProps) {
   const { data } = useQuery({
     queryKey: ['folders'],
     queryFn: () => getFolders(userId),
@@ -23,7 +24,10 @@ export function BookmarkOptionSubMenu({ userId, bookmarkId }: MoveBookmarkProps)
 
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>Move to</DropdownMenuSubTrigger>
+      <DropdownMenuSubTrigger className="flex items-center gap-2 cursor-pointer">
+        <FastForwardIcon strokeWidth={1.25} className="size-4" />
+        <span>Move to...</span>
+      </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
         <DropdownMenuSubContent>
           {data?.folders.length === 0 && (
