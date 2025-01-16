@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { ThemeSwitcher } from './theme-switcher'
 import { JetBrains_Mono } from 'next/font/google'
 
-const jetBrainsMono = JetBrains_Mono()
+const jetBrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 export function Header() {
   return (
