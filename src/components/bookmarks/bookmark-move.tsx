@@ -25,8 +25,6 @@ export function BookmarkMove({ bookmarkId, folderId, folderName }: BookmarkMoveP
       return
     }
 
-    toast.success('Bookmark moved successfully.')
-
     router.refresh()
   }
 
