@@ -56,7 +56,8 @@ export const bookmarkCreateInputSchema = bookmarkSchema.omit({
 /** bookmark update input */
 export const bookmarkUpdateInputSchema = z.object({
   bookmarkId: z.string(),
-  folderId: z.string(),
+  folderId: z.string().nullish(),
+  title: z.string().nullish(),
 })
 
 /** folder create input */
