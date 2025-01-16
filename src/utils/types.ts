@@ -27,7 +27,7 @@ export const responseError = z.object({
 export const urlDataFetcherSchema = z.object({
   title: z.string().nullish(),
   favicon: z.string().nullish(),
-  ogImage: z.string().url().nullish(),
+  ogImage: z.string().nullish(),
   description: z.string().nullish(),
   bookmarkUrl: z.string().nullish(),
 })
