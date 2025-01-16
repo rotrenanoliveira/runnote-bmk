@@ -20,7 +20,8 @@ export async function handle<T>(query: Promise<T>): Promise<[T, null] | [null, R
 
     return [result, null]
   } catch (error) {
-    console.log(error)
+    // TODO: remove this
+    console.error(error)
 
     if (error instanceof Error) return [null, { success: false, message: error.message }]
 

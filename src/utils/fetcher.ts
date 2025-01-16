@@ -27,11 +27,9 @@ export async function fetcher<T>(args: Promise<T>, options: FetcherOptions = { t
 
     // TODO: handle errors from different sources
     if (error instanceof HTTPError) {
-      const apiError = await error.response.json<{ message: string; errors?: string }>()
+      if (options.throw) throw error
 
-      if (options.throw) throw new Error(apiError.message)
-
-      return [null, { success: false, message: apiError.errors ?? apiError.message }]
+      return [null, { success: false, message: error.message }]
     }
 
     if (error instanceof Error) {
