@@ -1,8 +1,9 @@
 'use client'
 
+import { createContext, use, useContext, useMemo, useOptimistic } from 'react'
+
 import { generateNanoId } from '@/lib/nanoid'
 import type { Bookmark } from '@/utils/types'
-import { createContext, use, useContext, useMemo, useOptimistic } from 'react'
 
 type BookmarkAction =
   | { type: 'ADD'; payload: { bookmarkUrl: string; title: string } }

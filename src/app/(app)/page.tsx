@@ -6,6 +6,7 @@ import { UnfoldedBookmarks } from '@/components/bookmarks/unfolded-bookmarks'
 import { Folders } from '@/components/folders/folders'
 import { FolderDialog } from '@/components/folders/folder-dialog'
 import { SyncDialog } from '@/components/sync/sync-dialog'
+import { Header } from '@/components/header'
 
 export default async function HomePage() {
   const userId = await getUserId()
@@ -33,6 +34,8 @@ export default async function HomePage() {
           <Folders />
         </section>
       </main>
+
+      <Header />
     </div>
   )
 }
